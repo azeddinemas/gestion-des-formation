@@ -21,6 +21,9 @@ const user =  mongoose.Schema({
         type : String,
         required : true
     },
+    confirmed : {
+        Boolean : false
+    },
     organism : {
         type : String
     },
