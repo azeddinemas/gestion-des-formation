@@ -44,5 +44,14 @@ const login = async(req,res)=>{
     }
 }
 
+const getAll = async(req,res)=>{
+    try {
+        const data = await User.find()
+        res.send(data)
+    } catch (error) {
+        res.send(error)
+    }
+}
 
-module.exports = {addUser,login}
+
+module.exports = {addUser,login,getAll}

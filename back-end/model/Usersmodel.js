@@ -2,27 +2,23 @@ const mongoose = require('mongoose')
 
 const user =  mongoose.Schema({
     name : {
-        type : String,
-        required : true
+        type : String
     },
     role : {
-        type : String,
-        // required : true
+        type : String
     },
     phone : {
-        type : String,
-        required : true
+        type : String
     },
     email : {
-        type : String,
-        required : true
+        type : String
     },
     password : {
-        type : String,
-        required : true
+        type : String
     },
     confirmed : {
-        Boolean : false
+        type : Boolean,
+        default : false
     },
     organism : {
         type : String
