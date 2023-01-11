@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs')
 const mailer = require('./mailerController')
 const ls = require('local-storage')
 
-const addUser = async(req,res)=>{
+const addUser = async(req,res,next)=>{
 
     const {body} = req;
     try {
@@ -15,16 +15,18 @@ const addUser = async(req,res)=>{
             const data = await User.create({...body,role : 'employe',password:hash})
             if (data) {
                 res.status(200).send(data) 
-            }else res.status(401).send('not created')
+            }else {
+                throw new Error('not created')
+            }
         }else {
-            res.status(401).send('email deja exist')
+            throw new Error('email deja exist')
         }
     } catch (error) {
-        res.status(401).send(error)
+        next(error)
     }
 }
 
-const login = async(req,res)=>{
+const login = async(req,res,next)=>{
 
     try {
         const {body}=req;
@@ -34,22 +36,22 @@ const login = async(req,res)=>{
                 const pass = await bcrypt.compare(body.password,mail.password)
                 if (pass) {
                     res.send('login success')
-                }else {res.status(401).send('password incorrect')}
-            }else {res.send('your email not confirmed')}
+                }else {throw Error('password incorrect')}
+            }else {throw Error('your email not confirmed')}
         }else {
-            res.status(401).send('email incorrect')
+            throw Error('email incorrect')
         }
     } catch (error) {
-        res.status(401).send(error)
+        next(error)
     }
 }
 
-const getAll = async(req,res)=>{
+const getAll = async(req,res,next)=>{
     try {
         const data = await User.find()
-        res.send(data)
+            res.send(data)
     } catch (error) {
-        res.send(error)
+        next(error)
     }
 }
 
