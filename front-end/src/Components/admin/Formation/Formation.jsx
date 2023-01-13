@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Addformation from './Addformation';
+import "./Formation.css";
 
 const Formation = () => {
   return (
@@ -17,9 +19,7 @@ const Formation = () => {
     </div>
     <hr/>
     <input type="checkbox" className="d-none" id="adds"/>
-    <form>
-        <input type={'text'} placeholder='hh'/>
-    </form>
+    <Addformation/>
     <div style={{width: "99%", margin: "auto"}} className="row overflow-auto">
         <table className="table table-bordered" id="myTable">
             <thead>

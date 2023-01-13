@@ -7,21 +7,21 @@ const Statistiques = () => {
             <div className="col-md col-sm-6 p-2">
                 <div className="p-2 rounded-4" style={{background: "#badff8"}}>
                     <i className="bi bi-grid fs-3" style={{color: "#31a2e4"}}></i>
-                    <p>Repas</p>
+                    <p>Employe</p>
                     <p className="text-end fw-bold fs-5">5</p>
                 </div>
             </div>
             <div className="col-md col-sm-6 p-2">
                 <div className="p-2 rounded-4" style={{background: "#ee94cb"}}>
-                    <i className="bi bi-file-earmark-bar-graph fs-3" style={{color: "#f33d9e"}}></i>
-                    <p>Categories</p>
+                    <i className="bi bi-buildings fs-3" style={{color: "#f33d9e"}}></i>
+                    <p>Organisme</p>
                     <p className="text-end fw-bold fs-5">5</p>
                 </div>
             </div>
             <div className="col-md col-sm-6 p-2">
                 <div className="p-2 text-white rounded-4" style={{background: "#FF8303"}}>
-                    <i className="bi bi-cart2 fs-3"></i>
-                    <p>commandes</p>
+                    <i className="bi bi-book fs-3"></i>
+                    <p>Formation</p>
                     <p className="text-end fw-bold fs-5">5</p>
                 </div>
             </div>

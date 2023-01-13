@@ -22,24 +22,20 @@ const Sidebar = () => {
                     <i className="bi bi-speedometer2 fs-5 me-2"></i>&nbsp;Dashboard
                 </NavLink>
                 <br />
-                <NavLink className="nav-link p-2" to={"/users"}>
-                    <i className="bi bi-bicycle fs-5 me-2"></i>&nbsp;Organism
+                <NavLink className="nav-link p-2" to={"/organism"}>
+                    <i className="bi bi-buildings fs-5 me-2"></i>&nbsp;Organism
                 </NavLink>
                 <br />
                 <NavLink className="nav-link p-2" to={"/formation"}>
                     <i className="bi bi-book fs-5 me-2"></i>&nbsp;&nbsp;Formation
                 </NavLink>
                 <br />
-                <NavLink className="nav-link p-2 text-nowrap" to={"/commands"}>
-                    <i className="bi bi-cart2 fs-5 me-2"></i>&nbsp;commandes
-                </NavLink>
-                <br />
-                <NavLink className="nav-link p-2 text-nowrap" to={"/categories"}>
-                    <i className="bi bi-menu-button-wide-fill fs-5 me-2"></i>&nbsp;&nbsp;Categories
-                </NavLink>
-                <br />
                 <NavLink className="nav-link p-2" to={"/employes"}>
-                    <i className="bi bi-person me-2 fs-5"></i> Users
+                    <i className="bi bi-people me-2 fs-5"></i> Users
+                </NavLink>
+                <br />
+                <NavLink className="nav-link p-2" to={""}>
+                    <i className="bi bi-sliders me-2 fs-5"></i> settings
                 </NavLink>
                 <br />
             </nav>
