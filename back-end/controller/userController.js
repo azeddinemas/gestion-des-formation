@@ -48,8 +48,8 @@ const login = async(req,res,next)=>{
 
 const getAll = async(req,res,next)=>{
     try {
-        const data = await User.find()
-            res.send(data)
+        const data = await User.find({role : 'employe'})
+        res.send(data)
     } catch (error) {
         next(error)
     }

@@ -1,4 +1,5 @@
 const Formation = require('../model/Formation')
+const User = require('../model/Usersmodel')
 
 const addFormation = (req,res)=>{
     const {body} = req;
@@ -11,7 +12,12 @@ const addFormation = (req,res)=>{
 
 const getFormation = (req,res)=>{
 
-    Formation.find().then((data)=>{
+    Formation.find()
+    .populate({
+        path : 'employe',
+        model : User
+    })
+    .then((data)=>{
         res.send(data)
     }).catch((error)=>{
         res.status(401).send(error)

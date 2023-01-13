@@ -1,6 +1,8 @@
 import React from 'react'
 
 const Addemploye = () => {
+    // const [data, setData] = useState({})
+  
   return (
     <div className='form'>
             <form method="POST" className='mt-2 d-flex justify-content-between' encType='multipart/form-data' id='form'>

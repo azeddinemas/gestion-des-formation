@@ -1,9 +1,22 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import Addformation from './Addformation';
+import axios from "axios";
 import "./Formation.css";
+import { API_URL } from '../../Config';
 
 const Formation = () => {
+    const [data, setData] = useState([])
+    function getAll() {
+        axios.get(`${API_URL}/formation/getAll`).then((e)=>{
+            setData(e.data)
+        })
+    }
+
+    useEffect(() => {
+      getAll()
+    }, [])
+    
   return (
     <div className="container-fluid">
     <div className="row mt-4">
@@ -27,18 +40,21 @@ const Formation = () => {
                     <th scope='col'>image</th>
                     <th scope="col">name</th>
                     <th scope="col">description</th>
-                    <th scope='col'>price</th>
-                    <th scope='col'>categorie</th>
+                    <th scope='col'>Formateur</th>
+                    <th scope='col'>debut</th>
+                    <th scope='col'>fin</th>
                     <th className="text-center">operation</th>
                 </tr>
             </thead>
             <tbody className="bg-white">
-                <tr className="align-middle">
-                    {/* <td><img width={100} src={repas.image ? 'http://localhost:8080/images/'+repas.image:''}/></td> */}
-                    <td className='text-nowrap'>azert</td>
-                    <td >description</td>
-                    <td>price</td>
-                    <td>categorie</td>
+                {data.map((formation)=>(
+                <tr key={formation._id} className="align-middle">
+                    <td><img width={100} src={formation.image ? 'http://localhost:8080/images/'+formation.image:''}/></td>
+                    <td className='text-nowrap'>{formation.name}</td>
+                    <td >{formation.description}</td>
+                    <td>{formation.employe?formation.employe.name:''}</td>
+                    <td>{formation.debut}</td>
+                    <td>{formation.fin}</td>
                     <td className="d-flex flex-row justify-content-end">
                         <div className='text-nowrap'>
                             <Link to={`/EditRepas/`} className='btn btn-outline-info me-1'><i className="bi bi-pencil-square"></i></Link>
@@ -46,6 +62,7 @@ const Formation = () => {
                         </div>
                     </td>
                 </tr>                        
+                ))}
             </tbody>
         </table>
     </div>

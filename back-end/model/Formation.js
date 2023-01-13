@@ -11,11 +11,14 @@ const Formation = mongoose.Schema({
     description : {
         type : String        
     },
-    dateD : {
-        type : Date,
-        required : true
+    employe : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'user'        
     },
-    dateF : {
+    debut : {
+        type : Date
+    },
+    fin : {
         type : Date
     }
 })
