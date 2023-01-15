@@ -2,6 +2,7 @@ const User = require('../model/Usersmodel')
 const bcrypt = require('bcryptjs')
 const mailer = require('./mailerController')
 const ls = require('local-storage')
+const organism = require('../model/Organism')
 
 const addUser = async(req,res,next)=>{
 
@@ -49,11 +50,32 @@ const login = async(req,res,next)=>{
 const getAll = async(req,res,next)=>{
     try {
         const data = await User.find({role : 'employe'})
+        .populate({
+            path : 'organism',
+            model : organism
+        })
         res.send(data)
     } catch (error) {
         next(error)
     }
 }
 
+const banieCompte = async(req,res,next)=>{
+    try {
+        const id = req.params.id
+        const data = await User.findById({_id : id})
+        if (data.active) {
+            const e = awaitUser.updateOne({_id : id},{active : false})
+            res.send('bannie success')
+        }else {
+            const e = await User.updateOne({_id : id},{active : true})
+            res.send('active success')
+        }
+    } catch (error) {
+        next(error)
+    }
+    
+}
 
-module.exports = {addUser,login,getAll}
+
+module.exports = {addUser,login,getAll,banieCompte}

@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-// import { toast,ToastContainer } from "react-toastify";
+import { toast,ToastContainer } from "react-toastify";
 import axios from "axios";
 import { API_URL } from '../../Config';
 
@@ -35,9 +35,12 @@ const Addformation = () => {
         formData.append('image',first.image)
         formData.append('debut',first.debut)
         formData.append('fin',first.fin)
-        axios.post(`${API_URL}/formation/add`,first)
-        .then((data) => {
-            console.log(data)    
+
+        axios.post(`${API_URL}/formation/add`,formData)
+        .then(() => {
+            toast.success('added success')
+        }).catch((err)=>{
+            console.log(err.response)
         })
     }
 
@@ -54,9 +57,12 @@ const Addformation = () => {
             </div>
             <div className="mb-3">
                 <label className="form-label">Formateur/ice</label>
-                <select className='form-select' name="categorie">
+                <select className='form-select' onChange={handlechange} name="employe">
                     {employe.map((data)=>(
-                        <option className='form-control' key={data._id}>{data.name}</option> 
+                        <>
+                        <option key={data._id} style={{display:'none'}}>Employes</option>
+                        <option className='form-control' value={data._id}>{data.name}</option> 
+                        </>
                     ))}
                 </select>
             </div>
@@ -77,7 +83,7 @@ const Addformation = () => {
             </div>
         </form>
         <hr />
-        {/* <ToastContainer/> */}
+        <ToastContainer/>
     </div>
   )
 }

@@ -8,6 +8,7 @@ Router.post('/add',user.addUser)
 Router.post('/login',user.login)
 Router.get('/confirmation/:token',mailer.confirm)
 Router.get('/getall',user.getAll)
+Router.put('/banie/:id',user.banieCompte)
 
 Router.get('/statistique',statistique.statistique)
 

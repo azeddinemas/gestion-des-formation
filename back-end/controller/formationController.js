@@ -3,7 +3,10 @@ const User = require('../model/Usersmodel')
 
 const addFormation = (req,res)=>{
     const {body} = req;
-    Formation.create({...body}).then((data)=>{
+    
+    const img = req.file.filename
+
+    Formation.create({...body,image:img}).then((data)=>{
         res.send(data)
     }).catch(error=>{
         res.status(401).send(error)

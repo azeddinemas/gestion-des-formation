@@ -20,11 +20,13 @@ const user =  mongoose.Schema({
         type : Boolean,
         default : false
     },
-    organism : {
-        type : String
+    active : {
+        type : String,
+        default : true
     },
-    formation : {
-        type : String
+    organism : {
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'organism'
     }
 })
 

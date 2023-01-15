@@ -8,6 +8,9 @@ import Employe from './Components/admin/Employe/Employe';
 import Formation from './Components/admin/Formation/Formation';
 import Organism from './Components/admin/Organism/Organism';
 import Login from './Components/Login/Login';
+import 'react-toastify/dist/ReactToastify.css';
+import Editformation from './Components/admin/Formation/Editformation';
+import Editeorganism from './Components/admin/Organism/Editeorganism';
 
 function App() {
   return (
@@ -21,6 +24,8 @@ function App() {
           <Route path='/employes' element={<Employe/>}/>
           <Route path='/formation' element={<Formation/>}/>
           <Route path='/organism' element={<Organism/>}/>
+          <Route path='/editformation/:id' element={<Editformation/>}/>
+          <Route path='/Editorganism/:id' element={<Editeorganism/>}/>
         </Route>
 
         <Route path={'/login'} element={<Login/>}/>
