@@ -2,9 +2,10 @@ import React,{useState,useEffect} from 'react'
 import axios from 'axios';
 import Addemploye from './Addemploye'
 import { API_URL } from '../../Config';
+import { toast,ToastContainer } from 'react-toastify';
 
 const Employe = () => {
-
+    
     const [data, setData] = useState([])
     function getAllEmploye() {
         axios.get(`${API_URL}/user/getall`).then((e)=>{
@@ -18,7 +19,8 @@ const Employe = () => {
 
     function banie(id) {
         axios.put(`${API_URL}/user/banie/${id}`)
-        .then(()=>{
+        .then((data)=>{
+            toast.success(data.data)
             getAllEmploye()
         })   
     }
@@ -68,6 +70,7 @@ const Employe = () => {
                 </tbody>
             </table>
         </div>
+        <ToastContainer/>
     </div>
   )
 }

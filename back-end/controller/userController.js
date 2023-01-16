@@ -31,13 +31,16 @@ const login = async(req,res,next)=>{
 
     try {
         const {body}=req;
+        console.log(body.email)
         const mail = await User.findOne({email : body.email})
         if (mail) {
             if (mail.confirmed == true) {
-                const pass = await bcrypt.compare(body.password,mail.password)
-                if (pass) {
-                    res.send('login success')
-                }else {throw Error('password incorrect')}
+                if (mail.active) {
+                    const pass = await bcrypt.compare(body.password,mail.password)
+                    if (pass) {
+                        res.send(mail.role)
+                    }else {throw Error('password incorrect')}
+                }else {throw Error('votre compte is desactive')}
             }else {throw Error('your email not confirmed')}
         }else {
             throw Error('email incorrect')
@@ -65,8 +68,8 @@ const banieCompte = async(req,res,next)=>{
         const id = req.params.id
         const data = await User.findById({_id : id})
         if (data.active) {
-            const e = awaitUser.updateOne({_id : id},{active : false})
-            res.send('bannie success')
+            const e = await User.updateOne({_id : id},{active : false})
+            res.send('desactive avec success')
         }else {
             const e = await User.updateOne({_id : id},{active : true})
             res.send('active success')
