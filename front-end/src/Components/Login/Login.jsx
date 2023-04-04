@@ -1,28 +1,31 @@
 import React,{useState} from 'react'
 import "./Login.css"
-import axios from "axios"
-import { useNavigate } from "react-router-dom";
-import {API_URL} from "../Config";
+import { useNavigate,Navigate } from "react-router-dom";
+import { toast,ToastContainer } from 'react-toastify';
+import { login } from '../../actions/auth';
+import { useDispatch,useSelector } from 'react-redux';
+
 
 const Login = () => {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [first, setFirst] = useState({})
+    const islogin = useSelector(state=>state.auth.login)
+    const [user, setUser] = useState({})
     const handlechange = (e)=>{
-        setFirst({...first,[e.target.name]:e.target.value})
+        setUser({...user,[e.target.name]:e.target.value})
     }
 
     function handleSubmit(e) {
         e.preventDefault()
-        axios.post(`${API_URL}/user/login`,first)
-        .then((data)=>{
-            localStorage.setItem('role',data.data)
-            if (data.data = 'admin') {
-                navigate('/dashboard')
-            }
-        }).catch((err)=>{
-            console.log(err.response.data.message)
-        })
+        dispatch(login(user))
     }
+
+    if (islogin) {
+        return navigate('/dashboard')
+    }
+
+
+
   return (
     <div className="container mt-5">
         <div className="card mx-auto" style={{maxWidth: '40rem'}}>
@@ -46,6 +49,7 @@ const Login = () => {
                 <button type="submit" onClick={handleSubmit} className="btn btn-info text-white">Submit</button>
             </form>
         </div>
+        {/* <ToastContainer/> */}
     </div>
   )
 }

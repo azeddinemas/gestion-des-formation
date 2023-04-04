@@ -1,0 +1,20 @@
+version: '3.8'
+services:
+  backend:
+
+    build: ./back-end
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+
+  frontend:
+    build: ./front-end
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./front-end/src:/app/src
+volumes:
+  mongodb-data:
+    driver: local

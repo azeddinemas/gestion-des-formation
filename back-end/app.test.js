@@ -12,11 +12,5 @@ describe('user', () => {
             const response = await supertest(app).post('user/add').send(body)
             expect(response.body.message).toBe('email deja exist')
         })
-    })
-    // describe('register employes', () => {
-
-    // })
-
-
- 
+    }) 
 })

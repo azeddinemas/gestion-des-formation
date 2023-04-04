@@ -11,6 +11,8 @@ import Login from './Components/Login/Login';
 import 'react-toastify/dist/ReactToastify.css';
 import Editformation from './Components/admin/Formation/Editformation';
 import Editeorganism from './Components/admin/Organism/Editeorganism';
+import AdminRouter from './privattouter/AdminRouter';
+import Notfound from './Components/Notfound.jsx';
 
 
 
@@ -20,7 +22,7 @@ function App() {
       <Routes>
 
 
-
+        <Route element={<AdminRouter/>}>
         <Route element={<DashboardAdmin/>}>
           <Route path='/dashboard' element={<Statistiques/>}/>
           <Route path='/employes' element={<Employe/>}/>
@@ -29,8 +31,10 @@ function App() {
           <Route path='/editformation/:id' element={<Editformation/>}/>
           <Route path='/Editorganism/:id' element={<Editeorganism/>}/>
         </Route>
+        </Route>
+        <Route path='*' element={<Notfound/>}/>
 
-        <Route path={'/login'} element={<Login/>}/>
+        <Route path={'/'} element={<Login/>}/>
 
       </Routes>
     </BrowserRouter>

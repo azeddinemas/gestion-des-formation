@@ -1,50 +1,23 @@
-import { API_URL } from "../Components/Config";
-import axios from 'axios';
-import { ToastContainer, toast } from "react-toastify";
+import {API_URL} from "../Components/Config";
+import axios from "axios";
 
-export const login = (user) => (dispatch) => {
-  
-  axios.post(`${API_URL}/user/login`, user)
 
-    .then((res) => {
 
-      toast.success('Login succefully !')
-      localStorage.setItem('info', JSON.stringify(res.data))
-   
-
-      dispatch({
-        type: 'LOGIN_SUCCESS',
-        payload: res.data.user,
-      });
-   
-
+export const login = (user)=>(dispatch)=>{
+    axios.post(`${API_URL}/user/login`,user)
+    .then((data)=>{
+        localStorage.setItem('role',data.data)
+        dispatch({type:'LOGIN_SUCCESS',payload:data.data})
+    }).catch((err)=>{
+        dispatch({type:'LOGIN_FIELD',payload:null})
     })
-    .catch(error => {
-
-      if (error.response) {
-        toast.warning(error.response.data.error, 'Please chek Form !')
-        dispatch({
-          type: 'LOGIN_FAIL',
-        });
-      }
-
-    })
-
-
 }
 
-export const logout = () => dispatch => {
-  axios.get(`${API_URL}/user/signout`)
-  .then(() => {
-    toast.success('Logout succefully !')
-      localStorage.removeItem('jwt_info')
 
-      dispatch({
-        type: 'LOGOUT',
-      });
-  })
-
-
-};
-
-<ToastContainer/>
+export const logout = ()=>(dispatch)=>{
+    localStorage.clear()
+    .then(()=> {
+        dispatch({type:'LOGOUT'})
+    })
+    
+}

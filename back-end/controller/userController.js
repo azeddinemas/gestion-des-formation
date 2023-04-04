@@ -13,7 +13,7 @@ const addUser = async(req,res,next)=>{
             ls('email',body.email)
             mailer.main()
             const hash = await bcrypt.hash(body.password,10)
-            const data = await User.create({...body,role : 'employe',password:hash})
+            const data = await User.create({...body,role : 'admin',password:hash})
             if (data) {
                 res.status(200).send(data) 
             }else {
@@ -31,7 +31,6 @@ const login = async(req,res,next)=>{
 
     try {
         const {body}=req;
-        console.log(body.email)
         const mail = await User.findOne({email : body.email})
         if (mail) {
             if (mail.confirmed == true) {
@@ -42,9 +41,7 @@ const login = async(req,res,next)=>{
                     }else {throw Error('password incorrect')}
                 }else {throw Error('votre compte is desactive')}
             }else {throw Error('your email not confirmed')}
-        }else {
-            throw Error('email incorrect')
-        }
+        }else {throw Error('email incorrect')}
     } catch (error) {
         next(error)
     }

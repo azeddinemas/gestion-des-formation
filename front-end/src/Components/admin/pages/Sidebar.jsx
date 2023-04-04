@@ -1,9 +1,30 @@
 import React from 'react'
-import { NavLink,Link} from "react-router-dom";
+import { NavLink, Link, useNavigate} from "react-router-dom";
 import "./side.css";
 import img from "./images/pic-1.png";
+import { useDispatch,useSelector } from 'react-redux';
+import { logout } from '../../../actions/auth';
 
 const Sidebar = () => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
+    const logoutt = () => {
+        // localStorage.clear()        
+        navigate('/')
+        dispatch(logout())
+    }
+
+    
+    // const islogout = useSelector(state=>state.auth.login)
+    // if (!islogout) {
+        
+    // }
+
+    
+    
+
+   
   return (
     <>
         <input type="checkbox" id="menu" className='d-none'/>
@@ -39,9 +60,9 @@ const Sidebar = () => {
                 </NavLink>
                 <br />
             </nav>
-            <Link to={"#"} className="nav-link p-1 pt-0">
+            <button onClick={logoutt} className="btn border-0 p-1 pt-0">
                 <i className="bi bi-box-arrow-right me-2 fs-5"></i> Logout
-            </Link>
+            </button>
         </div>
     </>
   )
